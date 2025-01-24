@@ -1,6 +1,6 @@
 {
   "name": "@xterswap/sdk-core",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "description": "Xterswap SDK Core",
   "repository": "https://github.com/XterioTech/xterswap-sdk-core.git",
   "keywords": [
