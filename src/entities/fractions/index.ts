@@ -1,4 +1,6 @@
-export { CurrencyAmount } from './currencyAmount'
-export { Fraction } from './fraction'
-export { Percent } from './percent'
-export { Price } from './price'
+import Fraction from './fraction'
+import Percent from './percent'
+import CurrencyAmount from './currencyAmount'
+import Price from './price'
+
+export { Fraction, Percent, CurrencyAmount, Price }

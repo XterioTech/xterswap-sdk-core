@@ -21,21 +21,13 @@ const toFixedRounding = {
   [Rounding.ROUND_UP]: RoundingMode.RoundUp
 }
 
-export class Fraction {
+export default class Fraction {
   public readonly numerator: JSBI
   public readonly denominator: JSBI
 
   public constructor(numerator: BigintIsh, denominator: BigintIsh = JSBI.BigInt(1)) {
     this.numerator = JSBI.BigInt(numerator)
     this.denominator = JSBI.BigInt(denominator)
-  }
-
-  private static tryParseFraction(fractionish: BigintIsh | Fraction): Fraction {
-    if (fractionish instanceof JSBI || typeof fractionish === 'number' || typeof fractionish === 'string')
-      return new Fraction(fractionish)
-
-    if ('numerator' in fractionish && 'denominator' in fractionish) return fractionish
-    throw new Error('Could not parse fraction')
   }
 
   // performs floor division
@@ -53,7 +45,7 @@ export class Fraction {
   }
 
   public add(other: Fraction | BigintIsh): Fraction {
-    const otherParsed = Fraction.tryParseFraction(other)
+    const otherParsed = other instanceof Fraction ? other : new Fraction(JSBI.BigInt(other))
     if (JSBI.equal(this.denominator, otherParsed.denominator)) {
       return new Fraction(JSBI.add(this.numerator, otherParsed.numerator), this.denominator)
     }
@@ -67,7 +59,7 @@ export class Fraction {
   }
 
   public subtract(other: Fraction | BigintIsh): Fraction {
-    const otherParsed = Fraction.tryParseFraction(other)
+    const otherParsed = other instanceof Fraction ? other : new Fraction(JSBI.BigInt(other))
     if (JSBI.equal(this.denominator, otherParsed.denominator)) {
       return new Fraction(JSBI.subtract(this.numerator, otherParsed.numerator), this.denominator)
     }
@@ -81,7 +73,7 @@ export class Fraction {
   }
 
   public lessThan(other: Fraction | BigintIsh): boolean {
-    const otherParsed = Fraction.tryParseFraction(other)
+    const otherParsed = other instanceof Fraction ? other : new Fraction(JSBI.BigInt(other))
     return JSBI.lessThan(
       JSBI.multiply(this.numerator, otherParsed.denominator),
       JSBI.multiply(otherParsed.numerator, this.denominator)
@@ -89,7 +81,7 @@ export class Fraction {
   }
 
   public equalTo(other: Fraction | BigintIsh): boolean {
-    const otherParsed = Fraction.tryParseFraction(other)
+    const otherParsed = other instanceof Fraction ? other : new Fraction(JSBI.BigInt(other))
     return JSBI.equal(
       JSBI.multiply(this.numerator, otherParsed.denominator),
       JSBI.multiply(otherParsed.numerator, this.denominator)
@@ -97,7 +89,7 @@ export class Fraction {
   }
 
   public greaterThan(other: Fraction | BigintIsh): boolean {
-    const otherParsed = Fraction.tryParseFraction(other)
+    const otherParsed = other instanceof Fraction ? other : new Fraction(JSBI.BigInt(other))
     return JSBI.greaterThan(
       JSBI.multiply(this.numerator, otherParsed.denominator),
       JSBI.multiply(otherParsed.numerator, this.denominator)
@@ -105,7 +97,7 @@ export class Fraction {
   }
 
   public multiply(other: Fraction | BigintIsh): Fraction {
-    const otherParsed = Fraction.tryParseFraction(other)
+    const otherParsed = other instanceof Fraction ? other : new Fraction(JSBI.BigInt(other))
     return new Fraction(
       JSBI.multiply(this.numerator, otherParsed.numerator),
       JSBI.multiply(this.denominator, otherParsed.denominator)
@@ -113,7 +105,7 @@ export class Fraction {
   }
 
   public divide(other: Fraction | BigintIsh): Fraction {
-    const otherParsed = Fraction.tryParseFraction(other)
+    const otherParsed = other instanceof Fraction ? other : new Fraction(JSBI.BigInt(other))
     return new Fraction(
       JSBI.multiply(this.numerator, otherParsed.denominator),
       JSBI.multiply(this.denominator, otherParsed.numerator)
@@ -146,12 +138,5 @@ export class Fraction {
     Big.DP = decimalPlaces
     Big.RM = toFixedRounding[rounding]
     return new Big(this.numerator.toString()).div(this.denominator.toString()).toFormat(decimalPlaces, format)
-  }
-
-  /**
-   * Helper method for converting any super class back to a fraction
-   */
-  public get asFraction(): Fraction {
-    return new Fraction(this.numerator, this.denominator)
   }
 }
