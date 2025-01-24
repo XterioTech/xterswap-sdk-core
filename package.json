@@ -1,0 +1,50 @@
+{
+  "name": "@xterswap/sdk-core",
+  "version": "0.1.0",
+  "description": "Xterswap SDK Core",
+  "repository": "https://github.com/XterioTech/xterswap-sdk-core.git",
+  "keywords": [
+    "xterswap",
+    "xterio chain"
+  ],
+  "license": "MIT",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "module": "dist/sdk-core.esm.js",
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=10"
+  },
+  "scripts": {
+    "build": "tsdx build",
+    "start": "tsdx watch",
+    "test": "tsdx test",
+    "prepublishOnly": "tsdx build"
+  },
+  "dependencies": {
+    "@ethersproject/address": "^5.0.2",
+    "@ethersproject/bytes": "^5.7.0",
+    "@ethersproject/keccak256": "5.7.0",
+    "@ethersproject/strings": "5.7.0",
+    "big.js": "^5.2.2",
+    "decimal.js-light": "^2.5.0",
+    "jsbi": "^3.1.4",
+    "tiny-invariant": "^1.1.0",
+    "toformat": "^2.0.0"
+  },
+  "devDependencies": {
+    "@types/big.js": "^4.0.5",
+    "@types/jest": "^24.0.25",
+    "tsdx": "^0.14.1"
+  },
+  "prettier": {
+    "printWidth": 120,
+    "semi": false,
+    "singleQuote": true
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
