@@ -45,27 +45,18 @@ export class Token extends BaseCurrency {
 }
 
 export const WETH9: { [chainId in ChainId]: Token } = {
-  [ChainId.MAINNET]: new Token(
-    ChainId.MAINNET,
-    '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2',
+  [ChainId.XTERIO_TESTNET]: new Token(
+    ChainId.XTERIO_TESTNET,
+    '0xEffEC2C35C4ef408e06B49fCB9d4241718213bA9',
     18,
-    'WETH9',
-    'Wrapped Ether'
+    'WBNB',
+    'Wrapped BNB'
   ),
-  [ChainId.ROPSTEN]: new Token(
-    ChainId.ROPSTEN,
-    '0xc778417E063141139Fce010982780140Aa0cD5Ab',
+  [ChainId.XTERIO]: new Token(
+    ChainId.XTERIO,
+    '0xDF58388BABD2dD275A769E968cC9794cd31dFd57',
     18,
-    'WETH9',
-    'Wrapped Ether'
+    'WBNB',
+    'Wrapped BNB'
   ),
-  [ChainId.RINKEBY]: new Token(
-    ChainId.RINKEBY,
-    '0xc778417E063141139Fce010982780140Aa0cD5Ab',
-    18,
-    'WETH9',
-    'Wrapped Ether'
-  ),
-  [ChainId.GÖRLI]: new Token(ChainId.GÖRLI, '0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6', 18, 'WETH9', 'Wrapped Ether'),
-  [ChainId.KOVAN]: new Token(ChainId.KOVAN, '0xd0A1E359811322d97991E03f863a0C30C2cF029C', 18, 'WETH9', 'Wrapped Ether')
 }
