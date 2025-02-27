@@ -59,4 +59,11 @@ export const WETH9: { [chainId in ChainId]: Token } = {
     'WBNB',
     'Wrapped BNB'
   ),
+  [ChainId.BNB]: new Token(
+    ChainId.BNB,
+    '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
+    18,
+    'WBNB',
+    'Wrapped BNB'
+  ),
 }

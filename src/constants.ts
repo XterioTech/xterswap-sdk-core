@@ -6,6 +6,7 @@ export type BigintIsh = JSBI | string | number
 export enum ChainId {
   XTERIO_TESTNET = 1637450,
   XTERIO = 112358,
+  BNB = 56,
 }
 
 export enum TradeType {
